@@ -1,0 +1,46 @@
+Pom.xml
+update springboot starter parent-->3.0.10
+
+properties
+maven-compiler-plugin-version-->2.3.2
+mavendeploy.plugin-version-->2.7
+maven.release.plugin.version--->3.0.0-M1
+<kafka-avro-serializer.version-->7.3.3
+Kafka-client.version-->3.3.2
+spring-cloud.version-->2022.0.1
+logstash-logback-encoder.version-->4.11
+
+dependency
+1)lombok-->1.18.26
+2)spring-boot-dependencies-->3.0.10
+3)hibernate-core-->6.1.4.Final
+4)spring-cloud-starter-config-->4.0.2
+5)spring-cloud-starter-bootstrap-->4.0.2
+6)logback-core-->1.3.5
+7)logback-classic--.1.3.5
+8)logstash-logback-encoder
+    exclusion-->jackson-databind
+9)maven-release-plugin.version
+
+
+entity-->
+update
+import javax.persistence.column,entity,id--->import jakarta.persistence.column,entity,id
+
+you can replace hibernate by jpa for all queries
+for example
+@Query("from table where a=?1)
+public getdata(String a);
+ replace
+public findbyA
+
+
+for deletion we need to check whether record is present in table then delete but now,not required it will firstly check and delete record.
+public int deletebyA(string a);
+
+
+
+
+
+
+
