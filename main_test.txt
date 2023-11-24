@@ -1,0 +1,29 @@
+How to test main Spring boot class.
+Pom.xml-->
+maven-compiler-plugin-version-->3.11.0
+add dependency-->
+mockito-inline
+remove dependency-->powermock-core,powermock-api-mockito2
+
+
+
+mainclasstest
+withoutParmstest(){
+assertThrows(RuntimeException.class,()->xyzApplication.main(new String[] {});
+}
+
+withParmstest(){
+assertThrows(RuntimeException.class,()->xyzApplication.main(new String[] {"--Dspring.cloud.config.enabled","--Dspring.cloud.config.enabled"});
+}
+
+@Test
+testMainApplicationWithParms(){
+try(MockedStatic<SpringApplication> mocked=mockStatic(SpringApplication.class));
+mocked.when(()->SpringApplication.run(xyzApplication.class,new String[]{"--Dspring.cloud.config.enabled","--Dspring.cloud.config.enabled"});
+}).thenReturn(Mockito.mock(context.class));
+Application.main(new String[] {"--Dspring.cloud.config.enabled","--Dspring.cloud.config.enabled"});
+
+mocked.verify(()->SpringApplication.run(xyzApplication.class,new String[]{"--Dspring.cloud.config.enabled","--Dspring.cloud.config.enabled"});
+
+}
+}

@@ -1,0 +1,11 @@
+how to throw exception manually for testing catch block
+doThrow(Exception.class).when(service).processKafkaMessage(any(),any());
+
+Exception check-->
+when(ConversionService.convert(any(),any()).thenThrow(new RunTimeException());
+
+when(ConversionService.convert(any(),any()).thenReturn(obj);
+
+How to set fields in test-->
+ReflectionTestUtils.setField(service,"variable","value");
+

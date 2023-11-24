@@ -1,0 +1,5 @@
+config file change
+1)consumerId
+2)startDateEnable
+3)topic-name
+4)user/pwd and mail Info 

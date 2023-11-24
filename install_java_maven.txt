@@ -1,0 +1,18 @@
+Install java and Maven-
+Download java X64 installer.
+install it ,go to enivornment variables of system.
+set path user variables:-  C:\Program Files\Java\jdk-19\bin
+create variable JAVA_HOME IN USER VARIABLE:- C:\Program Files\Java\jdk-19
+
+************In System Variables->
+create variable JAVA_HOME- C:\Program Files\Java\jdk-19\bin
+SET PATH-> C:\Program Files\Java\jdk-19\bin
+
+
+how to install maven->
+Download Apache Maven zip file
+extract it to c:program files with adminstrator permission.
+go to environment variables->
+create variable MAVEN_HOME in user variables- C:\Program Files\apache-maven-3.8.6
+create variable M2_HOME in user variables-C:\Program Files\apache-maven-3.8.6
+set path for system variables-C:\Program Files\apache-maven-3.8.6\bin
