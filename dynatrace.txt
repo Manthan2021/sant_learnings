@@ -1,0 +1,21 @@
+Dynatrace Kt-
+1)a very good monitoring tool front end,backend and database.
+2)it is not possible to monitor n number of microservices at once ,so we use dynatrace.
+3)how the dynatrace work is,it sets up an agent in your infrastructure and that agent keeps on monitoring that application.
+4)Davis AI,sits on your application and checks how your application is peforming,cpu,RAm,load.
+it monitors for long time and it observes when to raise alerts,when not to raise.
+5)if something unusual happens like(response time increased or any error).it raise alert.
+
+
+Difference between kibana and Dynatrace.
+1)Kibana works on elastic search 
+2)basically kibana checks on the application logs and dynatrace checks the infa.
+3)Dynatrace is like a dashboard where we can have all things like cpu,memory,db.we can configure whatever we want in a single place.
+4)Dynatrace have multiple features not all have the permission to do it.
+5)Settings-->Alerting-->Problem Alerting profiles.we might set  n number of alerts on the infrastructure.as per our needs.
+6)we can set alerts via other methods but that we need admin access.if you don't know how to use other teams will get alerts,that's issue.
+7)Dashboard is a form of data explorer.
+
+
+
+
