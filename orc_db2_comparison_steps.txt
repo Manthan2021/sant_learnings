@@ -1,0 +1,29 @@
+1)Go to source table(DB2) and Oracle tables
+2)verify the columns of both the tables are same or not,then you need to compare data type then you need to compare nullabilty column
+3)Indexes column name for DB2 table and Indexes column namefor Oracle tables should match.
+4)Kafka Insert Time ,Kafka Update would not be available DB2 tables it must be there in oracle only.
+5)Contcur Column needs to be identified,check with naresh.
+
+Offset table check the columns of the offset.
+6)check column name and data type must be same in offset table.
+7)after checking the columns ,come to indexes
+8)OffsetmetadataId should be unique,so it contains unique index name whereas other columns(enivornment,consumergroup,topic name,partition_Id) may or maynot
+ constitute same index name.
+9)indexname must be same and verify it first in PRE then in Dev.
+10)offset table index you must verify it with any existing offset table.
+11)main table you need to compare with DB2.
+
+
+**I am comparing offset table with another offset table
+in offset I compared-
+column,datatype in offset as well as Indexname and column name in the indexes.
+
+**while comparing indexes of the main table keep in mind
+1)it must have equal number of unique sets,and equal number of indexes and columns
+2)we compare indexes on the base of column names
+
+size of datatype must be compared for DB2 and oracle,ignoring Date and timestamp
+char/varchar same for DB2 oracle and numeric/decimal also same.
+
+we have a link strm..topic_name-key in which we get all keys
+and for strm..topic_name-value we check all columns are there in a table or not.
