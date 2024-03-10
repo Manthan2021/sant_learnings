@@ -73,8 +73,22 @@ verify((TopicPartionMetaData) method.invoke(myClass,0,0,null));
   });
 }
 
+Testing Exceptions using static methods-
+must have mockito in line
+public MockedStatic<KafkaStreamUtil> myutil;
+ 
+void ExceptionTest(){
+myutil=mockStatic(KafkaStreamUtils.class,"getStringValue")
+GenericRecord value=mock(GenericRecord.class);
+GenericRecord key=mock(GenericRecord.class);
+//ConsumerRecord....=new ConsumerRecord("",10,100,key,value)
+when(KafkaStreamUtils.getStringValue(any(),any()).thenThrow(ClassCastException.class);
+ckTransactionCodeCharge=kafkaRecordToTransactionCodeCharge.convert(record);
+assertNull(ckTransactionCodeCharge);
+myutil.close();
 
 
+}
 
 
 
