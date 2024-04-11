@@ -1,0 +1,43 @@
+import java.util.concurrent.TimeUnit;
+
+public class RetryExample {
+    public static void main(String[] args) {
+        int maxRetries = 3;
+        int retryCount = 0;
+        boolean success = false;
+
+        while (retryCount < maxRetries && !success) {
+            try {
+                // Your code that might throw an exception
+                // For demonstration, let's say we are trying to connect to a server
+                connectToServer();
+                success = true; // If no exception is thrown, mark as success
+            } catch (Exception e) {
+                System.out.println("Exception caught: " + e.getMessage());
+                retryCount++;
+                if (retryCount < maxRetries) {
+                    System.out.println("Retrying in 10 seconds...");
+                    try {
+                        TimeUnit.SECONDS.sleep(10); // Wait for 10 seconds before retrying
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        }
+
+        if (!success) {
+            System.out.println("Max retries exceeded. Unable to complete the operation.");
+        }
+    }
+
+    // Method simulating connection to a server
+    private static void connectToServer() throws Exception {
+        // Simulate an exception being thrown randomly
+        if (Math.random() < 0.5) {
+            throw new Exception("Connection failed!");
+        } else {
+            System.out.println("Connection successful!");
+        }
+    }
+}
