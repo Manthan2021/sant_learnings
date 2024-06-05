@@ -1,5 +1,6 @@
 how to throw exception manually for testing catch block
 doThrow(Exception.class).when(service).processKafkaMessage(any(),any());
+when(Repo.findByXYZ(any(),any())).thenThrow(new JDBCException(null,null));
 
 
 how to do nothing
