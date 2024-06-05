@@ -1,0 +1,634 @@
+1. A consumer is configured with enable.auto.commit=false. What happens when close() is called on the consumer object?
+
+a) The uncommitted offsets are committed
+b) A rebalance in the consumer group will happen immediately
+c) The group coordinator will discover that the consumer stopped sending heartbeats. It will cause rebalance after session.timeout.ms
+
+
+b
+-------------------------
+2. Which of the following is true regarding thread safety in the Java Kafka Clients? (select two)
+
+a) One producer can be safely used in multiple threads
+b) One consumer needs to run in one thread
+c) One producer needs to be run in one thread
+d) One consumer can be safely used in multiple threads
+
+a,b
+----------------------------
+3. Partition leader election is done by
+
+a) The Kafka Broker that is the controller
+b) The consumer
+c) Vote amongst the brokers
+d) Zookeeper
+
+a
+-------------------------------
+4. Two consumers share the same group.id (consumer group id). Each consumer will
+
+a) Read all data from all partitions
+b) Read mutually exclusive offset blocks on all partitions
+c) Real all the data on mutual exclusive partitions
+
+c
+-----------------------------
+5. Suppose you have 6 brokers and you decide to create a topic with 10 partitions and a replication factor of 3. The brokers 0 and 1 are on rack A, the brokers 2 and 3 are on rack B, and the brokers 4 and 5 are on rack C. If the leader for partition 0 is on broker 4, and the first replica is on broker 2, which broker can host the last replica? (select two)
+
+a)5
+b)3
+c)0
+d)1
+e)2
+f)6
+
+c,d
+------------------
+6. To produce data to a topic, a producer must provide the Kafka client with...
+
+a) the list of brokers that have the data, the topic name and the partitions list
+b) any broker from the cluster and the topic name
+c) all the brokers from the cluster and the topic name
+d) any broker from the cluster and the topic name and the partitions list
+
+b
+---------------------
+7. What is a generic unique id that I can use for messages I receive from a consumer?
+
+a) topic + partition + offset
+b) topic + timestamp
+c) topic + partition + timestamp
+
+a
+-------------------------
+8. Your streams application is reading from an input topic that has 5 partitions. You run 5 instances of your application, each with num.streams.threads set to 5. How many stream tasks will be created and how many will be active?
+
+a) 25 created, 5 active
+b) 5 created , 5 active
+c) 25 created , 25 active
+d) 5 created , 1 active
+
+a
+-----------------------------
+9. What is not a valid authentication mechanism in Kafka?
+
+a) SSL
+b) SASL/GSSAPI
+c) SASL/SCRAM
+d) SAML
+
+d
+-------------------------
+10. You are receiving orders from different customer in an "orders" topic with multiple partitions. Each message has the customer name as the key. There is a special customer named ABC that generates a lot of orders and you would like to reserve a partition exclusively for ABC. The rest of the message should be distributed among other partitions. How can this be achieved?
+
+a) Add metadata to the producer record
+b) Create a custom partitioner
+c) All messages with the same key will go to same partition, but the same partition may have messages with differnt keys. It is not possible to reserve
+d) Define Kafka broker routing rule
+
+b
+----------------------------------
+
+11.What exceptions may be caught by the following producer? (select two)
+ProducerRecord<String, String> record =
+            new ProducerRecord<>("topic1", "key1", "value1");
+    try {
+      producer.send(record);
+    } catch (Exception e) {
+            e.printStackTrace();
+}
+
+a) BufferExhaustedException
+b) SerializationException
+c) InvalidPartitionsException
+d) BrokerNotAvailable
+
+a,b
+------------------------------
+
+12. Consumer failed to process record # 10 and succeeded in processing record # 11. Select the course of action that you should choose to guarantee at least once processing
+
+a) Commit offsets at 11
+b) Do not commit until successfully processing the record at offset 10
+c) commit offsets at 10
+
+b
+------------------
+13. By default, which replica will be elected as a partition leader? (select two)
+
+a) Preferred leader broker if it is in-sync and auto.leader.rebalance.enable=false
+b) An in-sync replica
+c) Preferred leader broker if it is in-sync and auto.leader.rebalnce.enable=true
+d) any of the replicas
+
+b,c
+--------------------------
+14. There are 3 brokers in the cluster. You want to create a topic with a single partition that is resilient to one broker failure and one broker maintenance. What is the replication factor will you specify while creating the topic?
+
+a)1
+b)2
+c)3
+d)6
+
+c
+---------------------------
+15. What is the default port that the KSQL server listens on?
+
+a) 9092
+b) 2181
+c) 8083
+d) 8088
+
+d
+------------------------
+16. What happens if you write the following code in your producer? producer.send(producerRecord).get()
+
+a) Compression will be increased
+b) Throughput will be decreased
+c) It will force all brokers to acknowledge the ProducerRecord
+d) Batching will increase
+
+b
+---------------------
+17. Where are KSQL-related data and metadata stored?
+
+a) PostgresSQL database
+b) Schema Registry
+c) Kafka Topics
+d) Zookeeper
+
+c
+-------------------------
+18. You are using JDBC source connector to copy data from a table to Kafka topic. There is one connector created with max.tasks equal to 2 deployed on a cluster of 3 workers. How many tasks are launched?
+
+a) 3
+b) 1
+c) 6
+d) 2
+
+b
+--------------------------
+19. A producer application in a developer machine was able to send messages to a Kafka topic. After copying the producer application into another developer's machine, the producer is able to connect to Kafka but unable to produce to the same Kafka topic because of an authorization issue. What is the likely issue?
+
+a) The kafka ACL does not allow another machine IP
+b) Broker configuration needs to be changed to allow a different producer
+c) The kafka broker needs to be rebooted
+d) You cannot copy a producer application from one machine to another
+
+a
+----------------------------------------------
+
+20. You have a Zookeeper cluster that needs to be able to withstand the loss of 2 servers and still be able to function. What size should your Zookeeper cluster have?
+
+a) 2
+b) 5
+c) 4
+d) 6
+e) 3
+
+b
+----------------------
+21. Which actions will trigger partition rebalance for a consumer group? (select three)
+
+a) Add a new consumer to the consumer group
+b) Add a broker to the cluster
+c) A consumer in a consumer group shuts down
+d) Increase partitions of a topic
+e) Remove a broker from the cluster
+
+a,c,d
+------------------------------
+22.The rule "same key goes to the same partition" is true unless...
+
+a) the number of producer changes
+b) the number of partition changes
+c) the replication factor changes
+d) the number of kafka broker changes
+
+b
+------------------------------
+23. what java library is KSQL based on ?
+
+a) Kafka Streams
+b) REST Proxy
+c) Schema Registry
+d) Kafka Connect
+
+a
+----------------------------------
+24. To read data from a topic, the following configuration is needed for the consumers
+
+a) any broker to connect to, and the topic name
+b) all brokers of the cluster and the topic name
+c) any broker and the list of topic partitions
+d) the list of brokers that the data , the topic name and the partitions list
+
+a
+-------------------------------------
+25. A producer application was sending messages to a partition with a replication factor of 2 by connecting to Broker 1 that was hosting partition leader. If the Broker 1 goes down, what will happen?
+
+a) the producer will stop working
+b) The producer will automatically produce to the broker that has been elected leader
+c) The topic will be unavailable
+
+b
+--------------------
+26. A producer is sending messages with null key to a topic with 6 partitions using the DefaultPartitioner. Where will the messages be stored?
+
+a) the partition for the null key
+b) Any of the topic partitions
+c) Partition 5
+d) Partition 0
+
+b
+--------------------
+27. Which Kafka CLI should you use to consume from a topic?
+
+a) kafka-console-consumer
+b) kafka-console
+c) kafka-consumer-groups
+d) kafka-topics
+
+a
+-----------------------
+28. what is the default port number where kafka broker accepts client connections
+
+a) 9090
+b) 8081
+c) 9092
+d) 8080
+
+c
+----------------------
+
+29.Select the Kafka Streams joins that are always windowed joins.
+
+a) KTable-KTable join
+b) KStream-GlobalKTable 
+c) KStream-KTable
+d) KStream-KStream join
+
+d
+-----------
+30. A consumer sends a request to commit offset 2000. There is a temporary communication problem, so the broker never gets the request and therefore never responds. Meanwhile, the consumer processed another batch and successfully committed offset 3000. What should you do?
+
+a) Use kafka-consumer-group command to manually commit offsets 2000 for the consumer group
+b) Nothing
+c) Add a new consumer group
+d) Restart the consumer
+
+b
+-----------------------
+31. To prevent network-induced duplicates when producing to Kafka, I should use
+
+a) enable.idempotence=true
+b) max.in.flight.per.connection=1
+c) retries=2000000
+d) batch.size=1
+
+a
+-----------------------
+32. The Controller is a broker that is... (select two)
+
+a) elected by broker majority
+b) is responsible for consumer group rebalances
+c) is responsible for partition leader election
+d) elected by Zookeeper ensemble
+
+c,d
+---------------------------
+
+33. Once sent to a topic, a message can be modified
+
+a) True
+b) False
+
+b
+----------------------------
+
+34. Your priority for producing messages to the Kafka cluster is maximum throughput over low
+latency. What would you do to accomplish this? (choose one)
+
+a. Set batch.size low value and linger.ms to 0
+b. Set batch.size high value and linger.ms to 0
+c. Set batch.size low value and linger.ms to high value
+d. Set batch.size high value and linger.ms to high value
+
+d
+-------------------------------
+
+35. Your Kafka cluster consists of 3 brokers. You have 4 producer clients sending messages to the
+“driver” topic which currently has 12 partitions and the related produce requests are receiving
+timeout exceptions. What would you do to reduce these exceptions? (choose one)
+
+a. Increase the number of producer clients from 4 to 6
+b. Increase the number of “driver” topic partitions from 12 to 15
+c. Increase the number of brokers from 3 to 4 and distribute the 12 partitions equally
+across the 4 brokers
+d. Increase the replication factor of the “driver” topic to scale out the produce requests
+
+c
+--------------------------
+36. Your organization is developing an application that produces messages to Kafka with a
+requirement that the messages are evenly distributed across a topic with 20 partitions. After
+completing the initial design phase and client development, load testing resulted in the
+following:
+• 5% of test messages were written to 5 partitions
+• 20% of test messages were written to 10 partitions
+• 75% of test message were written to 5 partitions
+• Key assignment for the test messages correctly represented what is expected for the
+production environment
+What action might result in more even distribution of produced messages across the available
+partitions? (choose two)
+
+a. Write a custom partitioner
+b. Increase the number of producer clients used by the application
+c. Redesign the message key
+d. Distribute the topic partitions across additional brokers
+
+a,c
+--------------------------
+37. Your organization is developing an application that will render content on web pages based
+upon how the current user matches up against various demographic categories. When the user
+first accesses the web page it will generate a page view event written to a corresponding Kafka
+topic. The user profile database will also be ingested into a Kafka topic using a Kafka connector. 
+How do the web page view events and the user profile data need to be produced into their
+respective topics to allow for the application to easily associate each page view event with the
+corresponding user profile? (choose one)
+
+a. Configure the two topics so that they are written to the same Kafka cluster
+b. Configure the two topics so they are co-partitioned
+c. Stand up a producer and a Kafka connector on each client machine and assign these
+machines a subset of page view and corresponding user profile data
+d. Write a consumer application that processes all records in both the page view and user
+profile topics and allow it to associate these records as needed
+
+b
+----------------------------------------
+38.Your organization has a requirement to enrich data coming in from sensor devices that capture
+environmental data with sensor device profile data contained in a database that includes details
+such as location, device model, etc. Which of the following scenarios would best answer this
+requirement? (choose one)
+
+a. Produce the data coming from the sensor devices into a Kafka topic using the Message
+Queuing Telemetry Transport (MQTT) proxy and as an intermediate step, enrich each
+sensor data record using the Java database connectivity (JDBC) source connector to
+access the sensor device profile data combined with multiple single message transforms
+(SMT).
+b. Produce the data coming from the sensor devices into a Kafka topic using the MQTT
+connector and as an intermediate step, enrich each sensor data record using the JDBC
+sink connector to access the sensor device profile data combined with multiple SMTs.
+c. Produce the data coming from the sensor devices into a Kafka topic using the MQTT
+proxy. Produce the sensor device profile data into a second Kafka topic using the JDBC
+source connector. Write a Kafka streams application to enrich the sensor data records
+with the sensor device profile data and write this out to a third Kafka topic.
+d. Write a Kafka producer client that captures the sensor device data using the MQTT
+proxy and enriches each record using sensor device profile data that it directly accesses
+from the source database. The enriched records will then be produced into a Kafka
+topic
+
+c
+----------------------------------------------------
+39. Your organization has a Kafka streams application that requires access to customer profile data
+maintained in a traditional relational database management system (RDBMS). This customer
+profile data contains sensitive Personal Identifying Information (PII). Which of the following
+solutions will give the Kafka streams application access to the non-PII customer profile data?
+(choose one)
+
+a. Use the Java database connectivity (JDBC) source connector to produce the customer
+profile data to a Kafka topic. Use a Kafka streams application to process and remove the
+PII from each customer profile data record as it is written to the initial Kafka topic. The
+Kafka streams application can then consume that topic.
+b. Use the JDBC source connector to produce the customer profile data to a Kafka topic.
+Include a single message transform masking operation in the connector configuration
+to mask the PII data before it is written to the Kafka topic. The Kafka streams
+application can then consume that topic.
+c. Use a ksqlDB application to read the customer profile data in the RDBMS, filter the PII
+data from each record, and write the filtered profile data to a Kafka topic. The Kafka
+streams application can then consume that topic.
+d. Write a custom Kafka producer to access the customer profile data, remove the
+customer PII from each record, and produce the filtered record to a Kafka topic. The
+Kafka streams application can then consume that topic.
+
+b
+---------------------
+40. Your organization has an application that uses a Kafka source connector to produce records into
+a Kafka topic. The load on this application varies depending upon the quantity of daily customer
+purchases. Which of the following will best accommodate this variable load on the application?
+a. Increase and decrease the number of brokers in the Kafka cluster based upon current
+application load.
+b. Increase and decrease the number of Kafka connector tasks based upon current
+application load.
+c. Increase and decrease the number of Kafka connect workers based upon current
+application load.
+d. Increase and decrease the number of Kafka topic partitions to which records are written
+based upon current application load.
+
+c
+------------------
+41. Your organization has legacy data stored in relational database management system (RDBMS). It
+has a requirement to ingest this legacy data into Kafka and transform it into multiple formats so
+that is can be easily processed various microservices that the organization now relies on. The
+development team that is assigned this task has experience using structured query language
+(SQL) procedures as part of its role managing data within the legacy RDBMS. Considering these
+factors, which of the following solutions is the best choice to satisfy the requirement? (choose
+one)
+
+a. Use the Java database connectivity (JDBC) source connector to produce the legacy data
+to a Kafka topic. Use a Kafka streams application to transform the data as needed.
+b. Create a new database schema in the RDBMS that meets the requirements of the
+microservices and transform the legacy data from the existing schema to the new
+schema using SQL procedures. Use the Java database connectivity (JDBC) source
+connector to produce the legacy data to a Kafka topic.
+c. Use the Java database connectivity (JDBC) source connector to produce the legacy
+data to a Kafka topic. Use ksqlDB to transform the data as needed and direct the
+resulting data to new Kafka topics.
+d. Use the JDBC source connector to produce the legacy data to multiple Kafka topics. For
+each destination Kafka topic, include single message transforms as needed to transform
+the data to meet the requirement for that topic.
+
+c
+--------------------------
+
+42. Select all that applies (select THREE)
+
+a) min.insync.replicas is a topic setting
+b) acks is a producer setting
+c) min.insync.replicas matters regardless of values of acks
+d) acks is a topic setting
+e) min.insync.replicas is a producer setting
+f) min.insync.replicas only matters if acks=all
+
+a,b,f
+-----------------------------
+
+43.There are 3 producers writing to a topic with 5 partitions. There are 10 consumers consuming from the topic as part of the same group. How many consumers will remain idle?
+
+a) 5
+b) 10
+c) None
+d) 3
+
+a
+--------------------
+44. You are sending messages with keys to a topic. To increase throughput, you decide to increase the number of partitions of the topic. Select all that apply.
+
+a) Old records will stay in their partitions
+b) New records may get written to a different partition
+c) All existing records will get rebalanced among the positions to balance load
+d) New records with the same key will get written to the partition where old records with that key were written
+
+a,b
+
+--------------------
+45. To transform data from a Kafka topic to another one, I should use
+a.Kafka Streams
+b.Consumer + Producer
+c.Kafka connect source
+d.Kafka connect sink
+
+a
+---------------------
+
+46. Which of the following window is used to aggregate events within period of activity separated by a defined gap of inactivity.
+
+a.sliding window
+b.tumbling window
+c.session window
+d.hopping window
+
+c
+--------------
+
+47.The exactly once guarantee in the Kafka Streams is for which flow of data?
+a.External->Kafka
+b.Kafka->External
+c.Kafka->Kafka
+
+c
+--------------
+
+48.Which of the following event processing application is stateless? (select two)
+a.Read log messages from a stream and write ERROR events into a high priority stream and rest of te events into a low-priority stream
+b.Find the minimum and maximum stock prices for each day of trading
+c.Publish the top 10 stocks each day
+d.Read events from a stream and modifies them from JSON to Avro
+
+a,d
+---------------------
+
+49.Which of the following Kafka Streams operators are stateful? (select all that apply)
+a.flatmap
+b.count
+c.aggregate
+d.reduce
+e.joining
+f.peek
+
+b,c,d,e
+----------------------
+50.In Avro, removing a field that does not have a default is a __ schema evolution
+
+a. backward
+b. forward
+c. full
+d. breaking
+
+a
+--------------------
+51. In Avro, removing or adding a field that has a default is a __ schema evolution
+
+a. backward
+b. forward
+c. full
+d. breaking
+
+c
+--------------------
+52. When using the Confluent Kafka Distribution, where does the schema registry reside?
+
+a. As in memory plugin on Kafka connect worker
+b. As in memory plugin on zookeeper cluster
+c. As in memory plugin on Kafka broker
+d. As separate JVM component
+
+d
+----------------------
+53. Where are the ACLs stored in a Kafka cluster by default?
+
+a) Inside broker's data directory
+b) In Kafka topic _kafka_acls
+c) Inside zookeeper node /kafka-acl/
+d) In schema registry
+
+c
+--------------------------
+
+54. What is the value of security.protocol config if SASL is used for client authentication and TLS is used for transport layer security
+
+a) SASL_SSL
+b) SSL
+c) SASL_PLAINTEXT
+d) SASL
+
+a
+-----------------------------------------
+
+55. A topic has three replicas and you set min.insync.replicas to 2. If two out of three replicas are not available, what happens when a consume request is sent to broker?
+
+a. Data will be returned from the remaining in-sync replica
+b. NotEnoughReplicasException will be returned
+c. A new leader for the partition will be selected
+d. An empty message will be returned
+
+b
+----------------------------------
+56. You are sending messages with keys to a topic. To increase throughput, you decide to increase the number of partitions of the topic. Select all that apply.
+
+a. Old records will stay in their partitions
+b. New records may get written to a different partition
+c. All existing records will get rebalanced among the positions to balance load
+d. New records with the same key will get written to the partition where old records with that key were written
+
+a,b
+--------------------------------
+57.Your topic is log compacted and you are sending a message with the key K and value null. What will happen?
+
+a. the broker will delete all messages with the key K upon cleanup
+b. the broker will delete the message with the key K and null value only upon cleanup
+c. The message will get ignored by kafka broker
+d. producer will throw a Runtime exception
+
+a
+----------------------------
+58. What are the requirements for a Kafka broker to connect to a Zookeeper ensemble? (select two)
+
+a) Unique value for each broker's zookeeper.connect parameter
+b) All the brokers must share same broker.id
+c) Unique values for each broker's broker.id parameter
+d) All the brokers must share same zookeeper.connect
+
+c,d
+------------------------
+59. There are five brokers in a cluster, a topic with 10 partitions and replication factor of 3, and a quota of producer_bytes_rate of 1 MB/sec has been specified for the client. What is the maximum throughput allowed for the client?
+
+a) 0.33 MB/s
+b) 5 MB/s
+c) 10 MB/s
+d) 1 MB/s
+
+b
+-----------------------
+60. Suppose you have 6 brokers and you decide to create a topic with 10 partitions and a replication factor of 3. The brokers 0 and 1 are on rack A, the brokers 2 and 3 are on rack B, and the brokers 4 and 5 are on rack C. If the leader for partition 0 is on broker 4, and the first replica is on broker 2, which broker can host the last replica? (select two)
+
+a) 5
+b) 3
+c) 0
+d) 1
+e) 2
+f) 6
+
+c,d
+--------------------------
+
+
