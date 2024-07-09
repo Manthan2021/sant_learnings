@@ -91,6 +91,43 @@ myutil.close();
 
 }
 
+//How to set private global values in a junit test case
+ReflectionTestUtils.setField(consumerService,"startDateEnable",value);
+
+How to create consumer Record/Generic Record
+
+Void SetUp(){
+String Value_Schema="{/type/:/record....\fields\" ...{name:\"field name" data_typwe.........}";
+Schema.Parser parser=new Schema Parser();
+genericRecord=new GenericData.Record(valueSchema);
+genericRecord.put("sv1Gfx","000");
+genericRecord.put("sv1Gfy","000");
+genericRecord.put("sv1Gfz","000");
+
+consumerRecord=new ConsumerRecord("topic",10,999,genericRecord,genericRecord);
+
+}
+
+//how to throw JDBC Exceptions
+when(offsetRepositorty.findByEnvironmentAndConsumerGroupAndTopicAndPartitionId(any(),any(),any(),any())).thenThrow(new JDBCException(null,null));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
